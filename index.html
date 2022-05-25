@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="home">
+		<h3 style="color: #03083a;text-align: center;"><br>Pre-Owned Cars Price Prediction</h3>
+		<div class="slideshow-container">
+			<div class="profile">
+			  	<img src="https://i.cdn.newsbytesapp.com/images/l200_33631614674874.jpg" style="width:100%">
+			  	<div class="text" style="color: white">Accurate price prediction by ML Model</div>
+			 </div>
+			<div class="profile">
+				  <img src="https://www.teahub.io/photos/full/195-1956766_creta-hyundai-2016.jpg" style="width:100%">
+				  <div class="text" style="color: white">Get the best price for your car</div>
+			</div>
+		</div>
+		<div class="merge">
+		<div style="text-align:center">
+		  		<span class="dot"></span> 
+		  		<span class="dot"></span> 
+			</div>
+			<div><h4 style="color: red;text-align: center;"><br>Please fill all the below details to get the price of the car.</h4></div>
+		</div>
+		<script>
+			var slideIndex = 0;
+			showSlides();
+
+			function showSlides() {
+			  var i;
+			  var slides = document.getElementsByClassName("profile");
+			  var dots = document.getElementsByClassName("dot");
+			  for (i = 0; i < slides.length; i++) {
+			    slides[i].style.display = "none";  
+			  }
+			  slideIndex++;
+			  if (slideIndex > slides.length) {slideIndex = 1}    
+			  for (i = 0; i < dots.length; i++) {
+			    dots[i].className = dots[i].className.replace(" active", "");
+			  }
+			  slides[slideIndex-1].style.display = "block";  
+			  dots[slideIndex-1].className += " active";
+			  setTimeout(showSlides, 4000); // Change image every 2 seconds
+			}
+		</script>
+	</div>
+
+	<div class="container">
+		<center><form style="background-color:#ccaf8c color:black" action="{{url_for('predict')}}" method="post">
+			<h4>Year (Which year owner bought the car)</h4>
+			<input id ="first" name = "Year" type = "number" placeholder="Enter The Year" style="height:30px;width: 300px;background-color: #d1d1d1;border-radius: 8px;">
+			<br><br>
+			<h4>What is the showroom price?(in lakhs)</h4>
+			<input id="second" name="Present_Price" required="required" placeholder="Enter The Price" style="height:30px;width: 300px;background-color: #d1d1d1;border-radius: 8px;">
+			<br><br>
+			<h4>How many kilometers drived?</h4>
+			<input id ="third" name="Kms_Driven" required="required" placeholder="Enter kilometers drived" style="height:30px;width: 300px;background-color: #d1d1d1;border-radius: 8px;">
+			<br><br>
+			<h4>How many owners previously had the car?(1 or 2 or 3)</h4>
+			<input id="fourth" name="Owner" required="required" placeholder="Enter The No.of Owners" style="height:30px;width: 300px;background-color: #d1d1d1;border-radius: 8px;">
+			<br><br>
+			<h4>What is the fuel type?</h4>
+
+			<select name="Fuel_Type_Petrol" id="fuel" required="required" style="height:35px;width: 300px;background-color: #d1d1d1;border-radius: 8px;">
+				<option value="select">--select--</option>
+				<option value="Petrol">Petrol</option>
+				<option value="Diesel">Diesel</option>
+				<option value="CNG">CNG</option>
+			</select>
+			<br><br>
+			<h4>Are you a Dealer or Individual?</h4>
+			<select name="Seller_Type_Individual" id = "resea" required="required" style="height:35px;width: 300px;background-color: #d1d1d1;border-radius: 8px;">
+				<option value="Dealer" style="color: gray">--select--</option>
+				<option value="Dealer">Dealer</option>
+				<option value="Individual">Individual</option>
+			</select>
+			<br><br>
+			<h4>Transmission type?</h4>
+			<select name="Transmission_Mannual" id="research" required="required" style="height:35px;width: 300px;background-color: #d1d1d1;border-radius: 8px;">
+				<option value="Transmission">--select--</option>
+				<option value="Mannual">Mannual Car</option>
+				<option value="Automatic">Automated Car</option>
+			</select>
+			<br><br>
+			<h4>Calculate selling price of the car</h4>
+			<button id="sub" type="submit" style="height:35px;width:300px;background-color: #059862; border-radius: 8px;color: white;font-size: 16px;cursor: pointer;border: none;">Calculate</button>
+			</form>
+			<br><br><br>
+		</form></center>
+	</div>
+	<div class="bottom">
+		<div class="Prediction" style="text-align: center;">
+				<h2>{{prediction_text}}</h2>
+			</div>
+	</div>
+</body>
+</html>
